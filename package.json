@@ -1,0 +1,15 @@
+{
+  "name": "nodejs-functional-example",
+  "version": "1.0.0",
+  "description": "Example using filter, reduce concepts in javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/"
+  },
+  "dependencies": {
+    "chai": "3.5.0"
+  },
+
+  "author": "Peter Ferak",
+  "license": "ISC"
+}
