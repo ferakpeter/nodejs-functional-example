@@ -1,29 +1,25 @@
-var index = require("../index");
+var naming = require("../original");
 var expect = require("chai").expect;
 
-describe('index', function() {
-  describe('#parse()', function () {
-    // [project.namespace, project.repository, project.subfolder, project.branch.replace(/\//g, '_'), pipelineName];
+var project = { namespace: 'foo1', repository: 'bar', branch: 'trunk/test', subfolder: undefined };
 
-    it('should extract the name according to scheme namespace.repository.branch.jobname', function () {
-        var project = { namespace: 'foo1', repository: 'bar', branch: 'trunk', subfolder: undefined };
-        var jobname = index.Parse(project, 'foobar');
+describe('Given the string elements of a repository URL in SVN or GIT', function() {
+  describe('passed to the function CreateApplicationName()', function () {
 
-        expect(jobname).to.equal('foo1.bar.trunk.foobar');
+    var jobname = naming.CreateApplicationName(project, 'foobar');
+
+    it('when the field is empty then dont display it', function () {
+        expect(jobname.split(".").length).to.equal(4);
     });
 
-    it('should extract the subfolder', function () {
-        var project = { namespace: 'foo', repository: 'bar', branch: 'trunk', subfolder: 'test' };
-        var jobname = index.Parse(project, 'foobar');
-
-        expect(jobname).to.equal('foo.bar.test.trunk.foobar');
+    it('when the field contains a slash, replace it with an underscore', function () {
+        String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
+        expect(jobname.contains("/")).to.equal(false);
+        expect(jobname.contains("_")).to.equal(true);
     });
 
-    it('should swallow empty values', function () {
-        var project = { namespace: '', repository: 'bar', branch: 'trunk', subfolder: '' };
-        var jobname = index.Parse(project, 'foobar');
-
-        expect(jobname).to.equal('bar.trunk.foobar');
+    it('otherwise join all fields into one string using the "." character between each string', function () {
+        expect(jobname).to.equal('foo1.bar.trunk_test.foobar');
     });
   });
 });
