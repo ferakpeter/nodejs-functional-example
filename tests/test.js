@@ -1,6 +1,8 @@
 var naming = require("../original");
 var expect = require("chai").expect;
 
+// description and tests for the CreateApplicationName function
+
 var project = { namespace: 'foo1', repository: 'bar', branch: 'trunk/test', subfolder: undefined };
 
 describe('Given the string elements of a repository URL in SVN or GIT', function() {

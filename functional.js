@@ -1,11 +1,11 @@
 // Array is list of elements, stateless functions executed on each element of the list to manipulate data
 
-function nonEmpty (value) {
-  return !empty(value);
-}
-
 function empty (value) {
   return typeof value === 'undefined' || !(value);
+}
+
+function nonEmpty (value) {
+  return !empty(value);
 }
 
 function removeSlashes (value) {

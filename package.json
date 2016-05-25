@@ -2,7 +2,7 @@
   "name": "nodejs-functional-example",
   "version": "1.0.0",
   "description": "Example using filter, reduce concepts in javascript",
-  "main": "index.js",
+  "main": "functional.js",
   "scripts": {
     "test": "mocha tests/"
   },
